@@ -1,0 +1,143 @@
+---
+interface Job {
+  company: string;
+  role: string;
+  duration: string;
+  description: string[];
+}
+
+const experience: Job[] = [
+  {
+    company: "Tech Solutions Inc.",
+    role: "Frontend Developer",
+    duration: "Jan 2022 - Present",
+    description: [
+      "Developed responsive user interfaces using React.js.",
+      "Collaborated with cross-functional teams to deliver projects on time.",
+      "Optimized web performance to improve load times by 25%."
+    ]
+  },
+  {
+    company: "Creative Studio",
+    role: "UI/UX Designer",
+    duration: "Aug 2020 - Dec 2021",
+    description: [
+      "Designed intuitive user experiences for web and mobile applications.",
+      "Conducted user research to inform design decisions.",
+      "Created wireframes, prototypes, and high-fidelity mockups."
+    ]
+  },
+];
+---
+
+<section id="experience" class="experience-section">
+<h2 class="section-title">Experience</h2>
+  {experience.map((job, index) => (
+    <div class="accordion">
+      <button
+        class="accordion-header"
+        aria-expanded={index === 0}
+      >
+        <div>
+          <h3>{job.role}</h3>
+          <p>{job.company} | {job.duration}</p>
+        </div>
+        <span class="accordion-icon" data-expanded={index === 0}>{index === 0 ? '-' : '+'}</span>
+      </button>
+      <div
+        class="accordion-content"
+        id={`accordion-content-${index}`}
+        style={`max-height: ${index === 0 ? "200px" : "0"};`}
+      >
+        <ul>
+          {job.description.map((point) => (
+            <li>{point}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  ))}
+</section>
+
+<script>
+  let openIndex = 0;
+
+  function toggleAccordion(index) {
+    const allContents = document.querySelectorAll(".accordion-content");
+    const allIcons = document.querySelectorAll(".accordion-icon");
+    allContents.forEach((content, idx) => {
+      if (idx === index) {
+        const isOpen = content.style.maxHeight !== "0px";
+        content.style.maxHeight = isOpen ? "0" : `${content.scrollHeight}px`;
+        allIcons[idx].textContent = isOpen ? "+" : "-";
+      } else {
+        content.style.maxHeight = "0";
+        allIcons[idx].textContent = "+";
+      }
+    });
+  }
+
+    const buttons = document.querySelectorAll('.accordion-header');
+
+    buttons.forEach((button, index) => {
+        button.addEventListener('click', () => toggleAccordion(index));
+    });
+</script>
+
+<style is:global>
+  .experience-section {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    color: var(--accent);
+  }
+
+  .accordion {
+    margin: 1rem 0;
+    border: 1px solid #2c3e50;
+    border-radius: 8px;
+    background-color: #112240;
+    overflow: hidden;
+  }
+
+  .accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: inherit;
+    width: 100%;
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .accordion-icon {
+    font-size: 1.5rem;
+    color: var(--accent);
+    transition: transform 0.3s ease;
+  }
+
+  .accordion-content {
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    max-height: 0;
+  }
+
+  .accordion-content ul {
+    padding: 1rem;
+    list-style: disc;
+  }
+
+  .accordion-content li {
+    margin-bottom: 0.5rem;
+  }
+</style>

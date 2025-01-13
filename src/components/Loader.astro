@@ -1,0 +1,120 @@
+---
+---
+<div class="loader-container">
+  <div class="dot-container">
+    <div class="dot dot1"></div>
+    <div class="dot dot2"></div>
+    <div class="dot dot3"></div>
+  </div>
+  <img src="/logo.png" alt="Logo" class="logo" />
+</div>
+
+<style>
+  .loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #0a192f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .dot-container {
+    display: flex;
+    gap: 20px;
+    position: relative;
+  }
+
+  .dot {
+    width: 15px;
+    height: 15px;
+    background-color: #64ffda;
+    border-radius: 50%;
+    opacity: 0;
+  }
+
+  /* Individual dot animations */
+  .dot1 {
+    animation: fadeIn 0.5s ease forwards,
+               mergeDots 0.5s ease forwards 2s;
+  }
+
+  .dot2 {
+    animation: fadeIn 0.5s ease 0.5s forwards,
+               mergeDots 0.5s ease forwards 2s;
+  }
+
+  .dot3 {
+    animation: fadeIn 0.5s ease 1s forwards,
+               mergeDots 0.5s ease forwards 2s;
+  }
+
+  .logo {
+    position: absolute;
+    width: 100px; /* Adjust based on your logo size */
+    height: auto;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes mergeDots {
+    to {
+      opacity: 0;
+      transform: translateX(calc(20px - 50%));
+    }
+  }
+
+  /* States */
+  .loader-container.logo-visible .logo {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .loader-container.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  // Sequence timing
+  const DOTS_SEQUENCE = 2000; // Time for dots to appear and merge
+  const LOGO_DURATION = 1000; // Time logo stays visible
+  const FADE_DURATION = 500;  // Fade out duration
+
+  // Get elements
+  const container = document.querySelector('.loader-container');
+  
+  // Loading sequence
+  setTimeout(() => {
+    // Show logo after dots merge
+    container?.classList.add('logo-visible');
+    
+    // Start fade out sequence
+    setTimeout(() => {
+      container?.classList.add('fade-out');
+      
+      // Remove loader from DOM after animation
+      setTimeout(() => {
+        container?.remove();
+      }, FADE_DURATION);
+    }, LOGO_DURATION);
+  }, DOTS_SEQUENCE);
+</script>

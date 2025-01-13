@@ -1,0 +1,350 @@
+---
+// About.astro
+---
+
+<section id="about" class="about-section">
+  <div class="about-container">
+    <h2 class="section-title">About Me</h2>
+    
+    <div class="content-wrapper">
+      <div class="coffee-scene">
+        <div class="coffee-mug">
+          <div class="mug">
+            <div class="coffee">
+              <div class="steam">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+            <div class="mug-shine"></div>
+            <div class="handle"></div>
+          </div>
+        </div>
+
+       <div class="coffee-beans">
+            <div class="bean"></div>
+            <div class="bean"></div>
+            <div class="bean"></div>
+            <div class="bean"></div>
+            <div class="bean"></div>
+            <div class="bean"></div>
+        </div>
+      </div>
+      
+      <div class="text-content">
+        <p>I'm a passionate software developer who loves building things from scratch. While my expertise lies in backend development, I have hands-on experience creating frontend and full-stack projects.</p>
+        
+        <p>Beyond coding, I'm fueled by coffee, curious dives into Wikipedia's hidden corners, and thought-provoking discussions on philosophy.</p>
+        
+        <p>I enjoy thriller movies, reading, and—when inspiration strikes—doom-scrolling adorable cat and dog content.</p>
+        
+        <p>Open to full-time opportunities and freelance projects, I'm always eager to turn ideas into reality. Let's build something extraordinary together!</p>
+      </div>
+    </div>
+  </div>
+  <div class="floating-elements">
+    <div class="philosophy-quote" style="top: 20%; left: 70%">Think therefore I am</div>
+    <div class="philosophy-quote" style="top: 35%; left: 20%">Know thyself</div>
+    <div class="philosophy-quote" style="top: 60%; left: 60%">Question everything</div>
+  </div>
+</section>
+
+<style>
+  .about-section {
+    min-height: 100vh;
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about-container {
+    max-width: 1200px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    color: var(--accent);
+  }
+
+  .content-wrapper {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  /* Floating philosophy quotes */
+  .floating-elements {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+
+  .philosophy-quote {
+    position: absolute;
+    font-family: 'Times New Roman', serif;
+    font-style: italic;
+    color: rgba(204, 214, 246, 0.1);
+    font-size: 1.5rem;
+    white-space: nowrap;
+  }
+
+  /* Coffee scene styles */
+  .coffee-scene {
+    width: 300px;
+    height: 400px;
+    position: sticky;
+    top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Coffee mug styles */
+  .coffee-mug {
+    width: 160px;
+    height: 160px;
+    position: relative;
+  }
+
+  .mug {
+    width: 120px;
+    height: 140px;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    border-radius: 5px 5px 20px 20px;
+    position: relative;
+    transform-origin: 50% 100%;
+    animation: mugFloat 4s ease-in-out infinite;
+    box-shadow: 
+      -15px 15px 30px rgba(0,0,0,0.2),
+      inset -5px 5px 10px rgba(255,255,255,0.8),
+      inset 5px -5px 10px rgba(0,0,0,0.1);
+  }
+
+  .mug-shine {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 15px;
+    height: 80%;
+    background: linear-gradient(90deg, rgba(255,255,255,0.4), transparent);
+    border-radius: 10px;
+    transform: skewX(-15deg);
+  }
+
+  .coffee {
+    width: 100%;
+    height: 75%;
+    background: linear-gradient(165deg, #4b2b23, #382018);
+    position: absolute;
+    bottom: 0;
+    border-radius: 0 0 15px 15px;
+    overflow: hidden;
+  }
+
+  .coffee::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(rgba(255,255,255,0.2), transparent);
+    animation: coffeeWave 2s ease-in-out infinite;
+  }
+
+  .handle {
+    width: 45px;
+    height: 70px;
+    border: 14px solid;
+    border-color: #e6e6e6;
+    border-left: 0;
+    border-radius: 0 35px 35px 0;
+    position: absolute;
+    right: -45px;
+    top: 25px;
+    box-shadow: 
+      5px 0 10px rgba(0,0,0,0.1),
+      inset 2px 0 5px rgba(0,0,0,0.1);
+  }
+
+  /* Steam animation */
+  .steam {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 30px;
+  }
+
+  .steam span {
+    position: absolute;
+    width: 3px;
+    height: 35px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    filter: blur(2px);
+  }
+
+  .steam span:nth-child(1) { left: 10px; animation: steam 3s infinite 0.2s; }
+  .steam span:nth-child(2) { left: 25px; animation: steam 3s infinite 0.6s; }
+  .steam span:nth-child(3) { left: 40px; animation: steam 3s infinite 1s; }
+  .steam span:nth-child(4) { left: 15px; animation: steam 3s infinite 1.4s; }
+
+  /* Coffee beans */
+  .coffee-beans {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+  }
+
+  .bean {
+    position: absolute;
+    width: 20px;
+    height: 25px;
+    background: linear-gradient(145deg, #4b2b23, #2a1810);
+    border-radius: 50%;
+    transform-origin: center;
+    opacity: 0;
+  }
+
+  .bean::before {
+    content: '';
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    background: #2a1810;
+    border-radius: 50%;
+    top: 15%;
+    left: 15%;
+    transform: rotate(-45deg);
+  }
+
+  @keyframes floatBean {
+    0% {
+      transform: translate(var(--x1), var(--y1)) rotate(0deg);
+      opacity: 1;
+    }
+    25% {
+      transform: translate(var(--x2), var(--y4)) rotate(90deg);
+      opacity: 1;
+    }
+    50% {
+      transform: translate(var(--x3), var(--y3)) rotate(180deg);
+      opacity: 1;
+    }
+    75% {
+      transform: translate(var(--x4), var(--y2)) rotate(270deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--x1), var(--y1)) rotate(360deg);
+      opacity: 1;
+    }
+  }
+
+  /* Animations */
+  @keyframes mugFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes steam {
+    0% {
+      transform: translateY(0) scaleX(1) rotate(0deg);
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.2;
+    }
+    100% {
+      transform: translateY(-30px) scaleX(3) rotate(15deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes coffeeWave {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(2px); }
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .content-wrapper {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .coffee-scene {
+      margin: 0 auto;
+      position: relative;
+      top: 0;
+    }
+
+    .text-content {
+      padding: 1rem;
+    }
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const beans = document.querySelectorAll('.bean');
+    
+    function generatePoints() {
+      const radius = 100; // Radius of the floating area
+      const points = [];
+      for (let i = 0; i < 4; i++) {
+        const angle = (Math.PI * 2 * i) / 4;
+        const variance = radius * 0.3; // 30% variance for randomness
+        const distance = radius + (Math.random() * variance - variance / 2);
+        points.push({
+          x: Math.cos(angle) * distance,
+          y: Math.sin(angle) * distance
+        });
+      }
+      return points;
+    }
+
+    function initBean(bean, index) {
+      const points = generatePoints();
+      const duration = 15 + Math.random() * 5; // Random duration between 15-20s
+      const delay = (index / beans.length) * -duration; // Stagger the start times
+      
+      // Set CSS variables for the animation points
+      bean.style.setProperty('--x1', `${points[0].x}px`);
+      bean.style.setProperty('--y1', `${points[0].y}px`);
+      bean.style.setProperty('--x2', `${points[1].x}px`);
+      bean.style.setProperty('--y2', `${points[1].y}px`);
+      bean.style.setProperty('--x3', `${points[2].x}px`);
+      bean.style.setProperty('--y3', `${points[2].y}px`);
+      bean.style.setProperty('--x4', `${points[3].x}px`);
+      bean.style.setProperty('--y4', `${points[3].y}px`);
+      
+      // Apply the animation
+      bean.style.animation = `floatBean ${duration}s ${delay}s linear infinite`;
+    }
+
+    beans.forEach((bean, index) => {
+      initBean(bean, index);
+    });
+  });
+</script>

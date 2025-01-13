@@ -1,0 +1,276 @@
+---
+// ProjectSection.astro
+import { Image } from 'astro:assets';
+
+interface Project {
+  title: string;
+  image: string;
+  link: string;
+  description: string;
+  height?: 'tall' | 'normal'; // Add height property for masonry variation
+}
+
+const projects: Project[] = [
+  {
+    title: "Project 1",
+    image: "/avatar.svg",
+    link: "https://project1.com",
+    description: "Description for project 1",
+    height: 'tall'
+  },
+  {
+    title: "Project 2",
+    image: "/avatar.svg",
+    link: "https://project2.com",
+    description: "Description for project 2",
+    height: 'normal'
+  },
+  {
+    title: "Project 3",
+    image: "/avatar.svg",
+    link: "https://project3.com",
+    description: "Description for project 3",
+    height: 'normal'
+  },
+  {
+    title: "Project 4",
+    image: "/avatar.svg",
+    link: "https://project4.com",
+    description: "Description for project 4",
+    height: 'tall'
+  },
+];
+---
+
+<section id="projects" class="projects-section max-w-7xl mx-auto px-4 py-16">
+  <h2 class="section-title">Projects</h2>
+  <div class="masonry-grid">
+    {projects.map((project) => (
+      <div class="masonry-item">
+        <div class="project-card-wrapper">
+          <div class={`project-card ${project.height === 'tall' ? 'card-tall' : ''}`}>
+            <div class="blue-reveal"></div>
+            <div class="project-image">
+              <Image 
+                src={project.image} 
+                alt={project.title} 
+                width={600} 
+                height={project.height === 'tall' ? 600 : 400}
+              />
+            </div>
+            <div class="project-overlay">
+              <h3 class="text-xl font-bold mb-2">{project.title}</h3>
+              <p class="text-sm mb-4 text-center px-4">{project.description}</p>
+              <a href={project.link} class="text-accent hover:underline">View Project</a>
+            </div>
+            <div class="animated-border"></div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .masonry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 2rem;
+    grid-auto-flow: dense;
+  }
+
+  @media (min-width: 768px) {
+    .masonry-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .masonry-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    color: var(--accent);
+  }
+
+  .project-card-wrapper {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    width: 100%;
+  }
+
+  .project-card {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 8px;
+    transform-style: preserve-3d;
+    transition: all 0.3s ease;
+    background: var(--bg-primary);
+    will-change: transform;
+  }
+
+  .card-tall {
+    height: 450px;
+  }
+
+  .blue-reveal {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: var(--accent);
+    z-index: 2;
+    opacity: 0;
+  }
+
+  .project-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 25, 47, 0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 3;
+  }
+
+  .animated-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 0 solid var(--accent);
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .project-card.in-view .blue-reveal {
+    animation: revealAndShrink 1.2s ease-in-out forwards;
+  }
+
+  .project-card:hover .project-overlay {
+    opacity: 1;
+  }
+
+  .project-card:hover .animated-border {
+    animation: borderGrow 0.4s ease-out forwards;
+  }
+
+  @keyframes revealAndShrink {
+    0% {
+      left: -100%;
+      opacity: 1;
+    }
+    50% {
+      left: 0;
+      opacity: 1;
+      transform: scaleX(1);
+    }
+    100% {
+      left: 0;
+      opacity: 1;
+      transform: scaleX(0);
+      transform-origin: right;
+    }
+  }
+
+  @keyframes borderGrow {
+    0% {
+      border-width: 0;
+    }
+    100% {
+      border-width: 12px;
+    }
+  }
+</style>
+
+<script>
+  let options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.2
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+      }
+    });
+  }, options);
+
+  function applyTiltEffect(card: HTMLElement, e: MouseEvent) {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const rotateX = ((y - centerY) / centerY) * 10;
+    const rotateY = ((x - centerX) / centerX) * 10;
+    
+    card.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+  }
+
+  function resetTilt(card: HTMLElement) {
+    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+  }
+
+  function initializeCards() {
+    const cards = document.querySelectorAll('.project-card');
+    
+    cards.forEach(card => {
+      // Intersection Observer
+      observer.observe(card);
+      
+      // Tilt effect
+      card.addEventListener('mousemove', (e) => {
+        applyTiltEffect(card as HTMLElement, e);
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        resetTilt(card as HTMLElement);
+      });
+    });
+  }
+
+  // Initialize on page load
+  document.addEventListener('astro:page-load', initializeCards);
+  
+  // Fallback for when astro:page-load doesn't fire
+  if (document.readyState === 'complete') {
+    initializeCards();
+  } else {
+    document.addEventListener('DOMContentLoaded', initializeCards);
+  }
+</script>

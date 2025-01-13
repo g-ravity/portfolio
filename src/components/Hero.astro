@@ -1,0 +1,268 @@
+---
+// Hero.astro
+---
+
+<section class="hero">
+  <div class="animated-background">
+    <!-- Animated shapes -->
+    <div class="shape circle"></div>
+    <div class="shape triangle"></div>
+    <div class="shape square"></div>
+    <div class="shape circle-sm"></div>
+    <div class="shape triangle-sm"></div>
+  </div>
+  
+  <div class="hero-content">
+    <div class="name-container">
+      <img src="/name.svg" alt="Name" class="name-svg animate-fade-in" />
+    </div>
+    <div class="avatar-container">
+      <div class="avatar-circle animate-circle">
+        <div class="avatar-wrapper animate-rise">
+          <img src="/avatar-resize.svg" alt="Avatar" class="avatar-svg" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--bg-primary);
+  }
+
+  .animated-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: 2rem;
+    padding: 0 2rem;
+  }
+
+  .name-container,
+  .avatar-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .name-svg {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    opacity: 0;
+  }
+
+  /* Avatar circle styles */
+  .avatar-circle {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: rgba(100, 255, 218, 0.1);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  .avatar-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: -100%;
+  }
+
+  .avatar-svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Animation classes */
+  .animate-circle {
+    animation: circleAppear 1s ease-out;
+    animation-delay: 3s;
+    animation-fill-mode: forwards;
+  }
+
+  .animate-rise {
+    animation: avatarRise 1.5s ease-out;
+    animation-delay: 4s;
+    animation-fill-mode: forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out;
+    animation-delay: 3s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes circleAppear {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes avatarRise {
+    0% {
+      bottom: -100%;
+    }
+    100% {
+      bottom: 0;
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Animated shapes */
+  .shape {
+    position: absolute;
+    opacity: 0.1;
+    animation: float 20s linear infinite;
+  }
+
+  .circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: var(--accent);
+    left: 10%;
+    top: 20%;
+  }
+
+  .triangle {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 86.6px solid #ff79c6;
+    right: 15%;
+    top: 30%;
+    animation-delay: -5s;
+  }
+
+  .square {
+    width: 70px;
+    height: 70px;
+    background: #50fa7b;
+    left: 30%;
+    bottom: 20%;
+    animation-delay: -10s;
+  }
+
+  .circle-sm {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #8be9fd;
+    right: 25%;
+    bottom: 30%;
+    animation-delay: -15s;
+  }
+
+  .triangle-sm {
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 43.3px solid #f1fa8c;
+    left: 20%;
+    bottom: 40%;
+    animation-delay: -7s;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+      transform: translate(100px, 100px) rotate(90deg);
+    }
+    50% {
+      transform: translate(200px, 0) rotate(180deg);
+    }
+    75% {
+      transform: translate(100px, -100px) rotate(270deg);
+    }
+    100% {
+      transform: translate(0, 0) rotate(360deg);
+    }
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .hero-content {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .name-container,
+    .avatar-container {
+      width: 100%;
+    }
+
+    .avatar-circle {
+      width: 300px;
+      height: 300px;
+    }
+
+    .shape {
+      transform-origin: center;
+      transform: scale(0.7);
+    }
+  }
+</style>
+
+<script>
+  // Add animation classes after page load
+  document.addEventListener('DOMContentLoaded', () => {
+    // Create random shapes
+    for (let i = 0; i < 5; i++) {
+      createRandomShape();
+    }
+  });
+
+  function createRandomShape() {
+    const shapes = ['circle', 'triangle', 'square'];
+    const colors = ['#64ffda', '#ff79c6', '#50fa7b', '#8be9fd', '#f1fa8c'];
+    
+    const shape = document.createElement('div');
+    shape.className = `shape ${shapes[Math.floor(Math.random() * shapes.length)]}`;
+    shape.style.left = `${Math.random() * 100}%`;
+    shape.style.top = `${Math.random() * 100}%`;
+    shape.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    shape.style.animationDuration = `${15 + Math.random() * 10}s`;
+    shape.style.animationDelay = `-${Math.random() * 20}s`;
+    
+    document.querySelector('.animated-background')?.appendChild(shape);
+  }
+</script>

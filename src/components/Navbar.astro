@@ -1,0 +1,128 @@
+---
+---
+<div class="container">
+    <nav class="navbar">
+    <div class="nav-logo">
+        <img src="/logo.png" alt="Logo" />
+    </div>
+    
+    <div class="nav-name" onClick="window.location.reload()">
+        <span class="tag-color">&lt;</span>
+        <span class="tag-name">RavikGanguly</span>
+        <span class="attribute-color"> alias</span>
+        <span class="equals-color">=</span>
+        <span class="value-color">"thegravityguy"</span>
+        <span class="attribute-color"> onClick</span>
+        <span class="equals-color">=</span>
+    <!-- <span class="value-color">"{reload}"</span> -->
+        <span class="tag-color">/&gt;</span>
+    </div>
+
+    <div class="nav-items">
+        <a href="#about" class="nav-item">About</a>
+        <a href="#services" class="nav-item">Services</a>
+        <a href="#projects" class="nav-item">Projects</a>
+        <a href="#experience" class="nav-item">Experience</a>
+        <a href="#blog" class="nav-item">Blog</a>
+    </div>
+    </nav>
+</div>
+
+<style>
+  .container{
+    width: 100%;
+    height: 100%;
+    display: grid;
+  }
+
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: rgba(10, 25, 47, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    z-index: 100;
+  }
+
+  .nav-logo img {
+    height: 40px;
+    width: auto;
+  }
+
+  .nav-name {
+    font-family: 'Fira Code', monospace;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+
+  .nav-name:hover {
+    opacity: 0.8;
+  }
+
+  /* Tag styling */
+  .tag-color { color: #ff79c6; }
+  .tag-name { color: #50fa7b; }
+  .attribute-color { color: #8be9fd; }
+  .equals-color { color: #ff79c6; }
+  .value-color { color: #f1fa8c; }
+
+  .nav-items {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-item {
+    position: relative;
+    color: #ccd6f6;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+  }
+
+  /* Hover animation for nav items */
+  .nav-item::before,
+  .nav-item::after {
+    content: '';
+    position: absolute;
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .nav-item::before {
+    content: '<';
+    left: -15px;
+    transform: translateX(10px);
+  }
+
+  .nav-item::after {
+    content: '/>';
+    right: -25px;
+    transform: translateX(-10px);
+  }
+
+  .nav-item:hover {
+    color: #64ffda;
+  }
+
+  .nav-item:hover::before,
+  .nav-item:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+  }
+</style>
+
+<script>
+  // Add Google Fonts for Fira Code
+  const link = document.createElement('link');
+  link.href = 'https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap';
+  link.rel = 'stylesheet';
+  document.head.appendChild(link);
+</script>

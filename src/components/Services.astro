@@ -1,0 +1,230 @@
+---
+---
+
+<section id="services" class="expertise-section">
+  <div class="content" style="background-image: url(/code-bg.svg)">
+    <h2 class="section-title">Services</h2>
+    
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="card-header">
+          <div class="icon-container">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </div>
+          <h3><span>Software Development</span></h3>
+        </div>
+        <p>Building robust, scalable applications with modern technologies and best practices for optimal performance.</p>
+        <div class="skills">
+          <span>Full Stack</span>
+          <span>API Design</span>
+          <span>Database</span>
+          <span>Architecture</span>
+          <span>Testing</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="card-header">
+          <div class="icon-container">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 13.381h20M8.66 19.05V22m6.68-2.95V22"/>
+              <rect x="2" y="2" width="20" height="8" rx="2.18" ry="2.18"/>
+              <path d="M6 2v20"/>
+            </svg>
+          </div>
+          <h3><span>DevOps & Cloud</span></h3>
+        </div>
+        <p>Streamlining deployment processes and optimizing cloud infrastructure for scalable, reliable applications.</p>
+        <div class="skills">
+          <span>AWS</span>
+          <span>Docker</span>
+          <span>Kubernetes</span>
+          <span>CI/CD</span>
+          <span>Terraform</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="card-header">
+          <div class="icon-container">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              <polyline points="7.5 4.21 12 6.81 16.5 4.21"/>
+              <polyline points="7.5 19.79 7.5 14.6 3 12"/>
+              <polyline points="21 12 16.5 14.6 16.5 19.79"/>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+              <line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+          </div>
+          <h3><span>Technical Consulting</span></h3>
+        </div>
+        <p>Strategic guidance and technical expertise to help businesses make informed technology decisions and implementations.</p>
+        <div class="skills">
+          <span>Architecture Design</span>
+          <span>Tech Strategy</span>
+          <span>Solutions Design</span>
+          <span>Best Practices</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .expertise-section {
+    min-height: 100vh;
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--background);
+    color: var(--text);
+  }
+
+  .code-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.03;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .code-background pre {
+    font-family: 'Fira Code', monospace;
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 2rem;
+    margin: 0;
+    white-space: pre-wrap;
+    color: var(--text);
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    color: var(--accent);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .icon-container {
+    background: rgba(var(--accent-rgb), 0.1);
+    width: 64px; /* Increased size */
+    height: 64px; /* Increased size */
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .icon {
+    width: 32px; /* Increased size */
+    height: 32px; /* Increased size */
+    color: var(--accent);
+  }
+
+  .service-card h3 {
+    font-size: 1.5rem;
+    margin: 0;
+    color: var(--text);
+    position: relative;
+    display: inline-block;
+  }
+
+  .service-card h3 span {
+    position: relative;
+    z-index: 1;
+  }
+
+  .service-card h3 span::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0.1em; /* Adjust to overlap with text */
+    width: 100%;
+    height: 0.3em; /* Thickness of the underline */
+    background-color: orange;
+    z-index: -1;
+    transform: skew(-15deg); /* Optional: adds a slight skew to the underline */
+  }
+
+  .service-card {
+    background: rgba(var(--card-rgb), 0.1);
+    border: 1px solid rgba(var(--card-border-rgb), 0.15);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    border-color: var(--accent);
+  }
+
+  .service-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skills span {
+    background: rgba(var(--accent-rgb), 0.1);
+    color: var(--accent);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: 768px) {
+    .expertise-section {
+      padding: 4rem 1rem;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+<script>
+  // Add any interactive features here if needed
+</script>
