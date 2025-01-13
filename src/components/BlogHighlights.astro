@@ -1,0 +1,222 @@
+---
+interface Blog {
+  title: string;
+  description: string;
+  link: string;
+}
+
+const blogs: Blog[] = [
+  {
+    title: "Introduction to Astro",
+    description: "Learn the basics of building lightning-fast websites with Astro.",
+    link: "#"
+  },
+  {
+    title: "10 JavaScript Tips for Developers",
+    description: "Enhance your JS skills with these practical tips and tricks.",
+    link: "#"
+  },
+  {
+    title: "Designing for Accessibility",
+    description: "Key considerations to make your designs inclusive for everyone.",
+    link: "#"
+  }
+];
+---
+
+<section class="blog-highlights">
+  <h2>Blog Highlights</h2>
+  <div style="display: flex">
+  <div class="folder" id="folder-icon">
+    <svg width="200" height="160" viewBox="0 0 200 160" fill="none">
+        <!-- Tab -->
+        <path class="folder-tab" d="M20 0H80L100 20H180C191 20 200 29 200 40V140C200 151 191 160 180 160H20C9 160 0 151 0 140V20C0 9 9 0 20 0Z" fill="#64ffda" fill-opacity="0.2"/>
+        <!-- Main folder -->
+        <path class="folder-body" d="M0 40C0 29 9 20 20 20H180C191 20 200 29 200 40V140C200 151 191 160 180 160H20C9 160 0 151 0 140V40Z" fill="#64ffda" fill-opacity="0.3"/>
+      </svg>
+  </div>
+  <div class="blog-paper" id="blog-paper">
+    <div class="blog-content">
+      <h3 id="blog-title">{blogs[0].title}</h3>
+      <p id="blog-description">{blogs[0].description}</p>
+      <a id="blog-link" href={blogs[0].link} target="_blank">Read More</a>
+    </div>
+  </div>
+  </div>
+</section>
+
+<script>
+const blogs: Blog[] = [
+  {
+    title: "Introduction to Astro",
+    description: "Learn the basics of building lightning-fast websites with Astro.",
+    link: "#"
+  },
+  {
+    title: "10 JavaScript Tips for Developers",
+    description: "Enhance your JS skills with these practical tips and tricks.",
+    link: "#"
+  },
+  {
+    title: "Designing for Accessibility",
+    description: "Key considerations to make your designs inclusive for everyone.",
+    link: "#"
+  }
+];
+
+let currentIndex = 0;
+
+function getNextIndex() {
+  currentIndex = (currentIndex + 1) % blogs.length;
+  return currentIndex;
+}
+
+  function showNextBlog() {
+    const blogPaper = document.getElementById("blog-paper");
+    const blogTitle = document.getElementById("blog-title");
+    const blogDescription = document.getElementById("blog-description");
+    const blogLink = document.getElementById("blog-link");
+
+    // Animation to "throw out" the paper
+    blogPaper.classList.add("animate-out");
+    setTimeout(() => {
+      // Update blog content
+      const nextIndex = getNextIndex();
+      blogTitle.textContent = blogs[nextIndex].title;
+      blogDescription.textContent = blogs[nextIndex].description;
+      blogLink.href = blogs[nextIndex].link;
+
+      // Reset animation
+      blogPaper.classList.remove("animate-out");
+      blogPaper.classList.add("animate-in");
+
+      setTimeout(() => {
+        blogPaper.classList.remove("animate-in");
+      }, 500);
+    }, 500);
+  }
+
+  const folder = document.getElementById('folder-icon')
+  folder.addEventListener('click', showNextBlog);
+</script>
+
+<style is:global>
+  .blog-highlights {
+    padding: 2rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .blog-highlights h2 {
+    color: var(--accent);
+  }
+
+  .folder {
+    display: inline-block;
+    cursor: pointer;
+    margin-top: 2rem;
+  }
+
+  .folder-icon {
+    width: 100px;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+
+  .folder:hover .folder-icon {
+    transform: scale(1.1);
+  }
+
+  .blog-paper.animate-out {
+    transform: translateY(-50px) rotate(-10deg);
+    opacity: 0;
+  }
+
+  .blog-paper.animate-in {
+    transform: translateY(50px) rotate(10deg);
+    opacity: 1;
+  }
+
+  .blog-paper {
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 400px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  position: relative;
+  border: 1px solid #dcdcdc;
+  font-family: "Arial", sans-serif;
+}
+
+/* The top bar mimicking a browser window */
+.blog-paper::before {
+  content: '';
+  display: block;
+  height: 40px;
+  background: #f5f5f5;
+  border-radius: 12px 12px 0 0;
+  border-bottom: 1px solid #dcdcdc;
+  position: relative;
+}
+
+/* The window control buttons (red, yellow, green) */
+.blog-paper::after {
+  content: '';
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  top: 12px;
+  left: 15px;
+}
+
+.blog-paper::after span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.blog-paper::after span:nth-child(1) {
+  background: #ff5f56; /* Red button */
+}
+
+.blog-paper::after span:nth-child(2) {
+  background: #ffbd2e; /* Yellow button */
+}
+
+.blog-paper::after span:nth-child(3) {
+  background: #27c93f; /* Green button */
+}
+
+/* Content inside the blog paper */
+.blog-content h3 {
+  margin: 1rem 0 0.5rem;
+  color: #333333;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.blog-content p {
+  margin: 0 0 1rem;
+  color: #555555;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.blog-content a {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.blog-content a:hover {
+  color: #0056b3;
+}
+</style>
