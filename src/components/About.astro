@@ -1,11 +1,11 @@
 ---
-// About.astro
+
 ---
 
 <section id="about" class="about-section">
   <div class="about-container">
     <h2 class="section-title">About Me</h2>
-    
+
     <div class="content-wrapper">
       <div class="coffee-scene">
         <div class="coffee-mug">
@@ -23,24 +23,37 @@
           </div>
         </div>
 
-       <div class="coffee-beans">
-            <div class="bean"></div>
-            <div class="bean"></div>
-            <div class="bean"></div>
-            <div class="bean"></div>
-            <div class="bean"></div>
-            <div class="bean"></div>
+        <div class="coffee-beans">
+          <div class="bean"></div>
+          <div class="bean"></div>
+          <div class="bean"></div>
+          <div class="bean"></div>
+          <div class="bean"></div>
+          <div class="bean"></div>
         </div>
       </div>
-      
+
       <div class="text-content">
-        <p>I'm a passionate software developer who loves building things from scratch. While my expertise lies in backend development, I have hands-on experience creating frontend and full-stack projects.</p>
-        
-        <p>Beyond coding, I'm fueled by coffee, curious dives into Wikipedia's hidden corners, and thought-provoking discussions on philosophy.</p>
-        
-        <p>I enjoy thriller movies, reading, and—when inspiration strikes—doom-scrolling adorable cat and dog content.</p>
-        
-        <p>Open to full-time opportunities and freelance projects, I'm always eager to turn ideas into reality. Let's build something extraordinary together!</p>
+        <p>
+          I'm a passionate software developer who loves building things from scratch. While my
+          expertise lies in backend development, I have hands-on experience creating frontend and
+          full-stack projects.
+        </p>
+
+        <p>
+          Beyond coding, I'm fueled by coffee, curious dives into Wikipedia's hidden corners, and
+          thought-provoking discussions on philosophy.
+        </p>
+
+        <p>
+          I enjoy thriller movies, reading, and—when inspiration strikes—doom-scrolling adorable cat
+          and dog content.
+        </p>
+
+        <p>
+          Open to full-time opportunities and freelance projects, I'm always eager to turn ideas
+          into reality. Let's build something extraordinary together!
+        </p>
       </div>
     </div>
   </div>
@@ -128,10 +141,10 @@
     position: relative;
     transform-origin: 50% 100%;
     animation: mugFloat 4s ease-in-out infinite;
-    box-shadow: 
-      -15px 15px 30px rgba(0,0,0,0.2),
-      inset -5px 5px 10px rgba(255,255,255,0.8),
-      inset 5px -5px 10px rgba(0,0,0,0.1);
+    box-shadow:
+      -15px 15px 30px rgba(0, 0, 0, 0.2),
+      inset -5px 5px 10px rgba(255, 255, 255, 0.8),
+      inset 5px -5px 10px rgba(0, 0, 0, 0.1);
   }
 
   .mug-shine {
@@ -140,7 +153,7 @@
     left: 10px;
     width: 15px;
     height: 80%;
-    background: linear-gradient(90deg, rgba(255,255,255,0.4), transparent);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.4), transparent);
     border-radius: 10px;
     transform: skewX(-15deg);
   }
@@ -162,7 +175,7 @@
     left: 0;
     width: 100%;
     height: 20px;
-    background: linear-gradient(rgba(255,255,255,0.2), transparent);
+    background: linear-gradient(rgba(255, 255, 255, 0.2), transparent);
     animation: coffeeWave 2s ease-in-out infinite;
   }
 
@@ -176,9 +189,9 @@
     position: absolute;
     right: -45px;
     top: 25px;
-    box-shadow: 
-      5px 0 10px rgba(0,0,0,0.1),
-      inset 2px 0 5px rgba(0,0,0,0.1);
+    box-shadow:
+      5px 0 10px rgba(0, 0, 0, 0.1),
+      inset 2px 0 5px rgba(0, 0, 0, 0.1);
   }
 
   /* Steam animation */
@@ -195,15 +208,27 @@
     position: absolute;
     width: 3px;
     height: 35px;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     filter: blur(2px);
   }
 
-  .steam span:nth-child(1) { left: 10px; animation: steam 3s infinite 0.2s; }
-  .steam span:nth-child(2) { left: 25px; animation: steam 3s infinite 0.6s; }
-  .steam span:nth-child(3) { left: 40px; animation: steam 3s infinite 1s; }
-  .steam span:nth-child(4) { left: 15px; animation: steam 3s infinite 1.4s; }
+  .steam span:nth-child(1) {
+    left: 10px;
+    animation: steam 3s infinite 0.2s;
+  }
+  .steam span:nth-child(2) {
+    left: 25px;
+    animation: steam 3s infinite 0.6s;
+  }
+  .steam span:nth-child(3) {
+    left: 40px;
+    animation: steam 3s infinite 1s;
+  }
+  .steam span:nth-child(4) {
+    left: 15px;
+    animation: steam 3s infinite 1.4s;
+  }
 
   /* Coffee beans */
   .coffee-beans {
@@ -263,8 +288,13 @@
 
   /* Animations */
   @keyframes mugFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
   }
 
   @keyframes steam {
@@ -282,8 +312,13 @@
   }
 
   @keyframes coffeeWave {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(2px); }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(2px);
+    }
   }
 
   /* Responsive design */
@@ -306,9 +341,9 @@
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', () => {
     const beans = document.querySelectorAll('.bean');
-    
+
     function generatePoints() {
       const radius = 100; // Radius of the floating area
       const points = [];
@@ -318,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const distance = radius + (Math.random() * variance - variance / 2);
         points.push({
           x: Math.cos(angle) * distance,
-          y: Math.sin(angle) * distance
+          y: Math.sin(angle) * distance,
         });
       }
       return points;
@@ -328,7 +363,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const points = generatePoints();
       const duration = 15 + Math.random() * 5; // Random duration between 15-20s
       const delay = (index / beans.length) * -duration; // Stagger the start times
-      
+
       // Set CSS variables for the animation points
       bean.style.setProperty('--x1', `${points[0].x}px`);
       bean.style.setProperty('--y1', `${points[0].y}px`);
@@ -338,7 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
       bean.style.setProperty('--y3', `${points[2].y}px`);
       bean.style.setProperty('--x4', `${points[3].x}px`);
       bean.style.setProperty('--y4', `${points[3].y}px`);
-      
+
       // Apply the animation
       bean.style.animation = `floatBean ${duration}s ${delay}s linear infinite`;
     }

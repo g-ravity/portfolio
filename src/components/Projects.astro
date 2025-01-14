@@ -1,5 +1,4 @@
 ---
-// ProjectSection.astro
 import { Image } from 'astro:assets';
 
 interface Project {
@@ -12,32 +11,32 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "Project 1",
-    image: "/avatar.svg",
-    link: "https://project1.com",
-    description: "Description for project 1",
-    height: 'tall'
+    title: 'Project 1',
+    image: '/avatar.svg',
+    link: 'https://project1.com',
+    description: 'Description for project 1',
+    height: 'tall',
   },
   {
-    title: "Project 2",
-    image: "/avatar.svg",
-    link: "https://project2.com",
-    description: "Description for project 2",
-    height: 'normal'
+    title: 'Project 2',
+    image: '/avatar.svg',
+    link: 'https://project2.com',
+    description: 'Description for project 2',
+    height: 'normal',
   },
   {
-    title: "Project 3",
-    image: "/avatar.svg",
-    link: "https://project3.com",
-    description: "Description for project 3",
-    height: 'normal'
+    title: 'Project 3',
+    image: '/avatar.svg',
+    link: 'https://project3.com',
+    description: 'Description for project 3',
+    height: 'normal',
   },
   {
-    title: "Project 4",
-    image: "/avatar.svg",
-    link: "https://project4.com",
-    description: "Description for project 4",
-    height: 'tall'
+    title: 'Project 4',
+    image: '/avatar.svg',
+    link: 'https://project4.com',
+    description: 'Description for project 4',
+    height: 'tall',
   },
 ];
 ---
@@ -45,29 +44,33 @@ const projects: Project[] = [
 <section id="projects" class="projects-section max-w-7xl mx-auto px-4 py-16">
   <h2 class="section-title">Projects</h2>
   <div class="masonry-grid">
-    {projects.map((project) => (
-      <div class="masonry-item">
-        <div class="project-card-wrapper">
-          <div class={`project-card ${project.height === 'tall' ? 'card-tall' : ''}`}>
-            <div class="blue-reveal"></div>
-            <div class="project-image">
-              <Image 
-                src={project.image} 
-                alt={project.title} 
-                width={600} 
-                height={project.height === 'tall' ? 600 : 400}
-              />
+    {
+      projects.map((project) => (
+        <div class="masonry-item">
+          <div class="project-card-wrapper">
+            <div class={`project-card ${project.height === 'tall' ? 'card-tall' : ''}`}>
+              <div class="blue-reveal" />
+              <div class="project-image">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  width={600}
+                  height={project.height === 'tall' ? 600 : 400}
+                />
+              </div>
+              <div class="project-overlay">
+                <h3 class="text-xl font-bold mb-2">{project.title}</h3>
+                <p class="text-sm mb-4 text-center px-4">{project.description}</p>
+                <a href={project.link} class="text-accent hover:underline">
+                  View Project
+                </a>
+              </div>
+              <div class="animated-border" />
             </div>
-            <div class="project-overlay">
-              <h3 class="text-xl font-bold mb-2">{project.title}</h3>
-              <p class="text-sm mb-4 text-center px-4">{project.description}</p>
-              <a href={project.link} class="text-accent hover:underline">View Project</a>
-            </div>
-            <div class="animated-border"></div>
           </div>
         </div>
-      </div>
-    ))}
+      ))
+    }
   </div>
 </section>
 
@@ -217,11 +220,11 @@ const projects: Project[] = [
   let options = {
     root: null,
     rootMargin: '0px',
-    threshold: 0.2
+    threshold: 0.2,
   };
 
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('in-view');
       }
@@ -232,13 +235,13 @@ const projects: Project[] = [
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    
+
     const rotateX = ((y - centerY) / centerY) * 10;
     const rotateY = ((x - centerX) / centerX) * 10;
-    
+
     card.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
   }
 
@@ -248,16 +251,16 @@ const projects: Project[] = [
 
   function initializeCards() {
     const cards = document.querySelectorAll('.project-card');
-    
-    cards.forEach(card => {
+
+    cards.forEach((card) => {
       // Intersection Observer
       observer.observe(card);
-      
+
       // Tilt effect
       card.addEventListener('mousemove', (e) => {
         applyTiltEffect(card as HTMLElement, e);
       });
-      
+
       card.addEventListener('mouseleave', () => {
         resetTilt(card as HTMLElement);
       });
@@ -266,7 +269,7 @@ const projects: Project[] = [
 
   // Initialize on page load
   document.addEventListener('astro:page-load', initializeCards);
-  
+
   // Fallback for when astro:page-load doesn't fire
   if (document.readyState === 'complete') {
     initializeCards();

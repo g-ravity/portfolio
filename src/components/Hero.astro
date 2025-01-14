@@ -1,5 +1,5 @@
 ---
-// Hero.astro
+
 ---
 
 <section class="hero">
@@ -11,7 +11,7 @@
     <div class="shape circle-sm"></div>
     <div class="shape triangle-sm"></div>
   </div>
-  
+
   <div class="hero-content">
     <div class="name-container">
       <img src="/name.svg" alt="Name" class="name-svg animate-fade-in" />
@@ -254,7 +254,7 @@
   function createRandomShape() {
     const shapes = ['circle', 'triangle', 'square'];
     const colors = ['#64ffda', '#ff79c6', '#50fa7b', '#8be9fd', '#f1fa8c'];
-    
+
     const shape = document.createElement('div');
     shape.className = `shape ${shapes[Math.floor(Math.random() * shapes.length)]}`;
     shape.style.left = `${Math.random() * 100}%`;
@@ -262,7 +262,7 @@
     shape.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
     shape.style.animationDuration = `${15 + Math.random() * 10}s`;
     shape.style.animationDelay = `-${Math.random() * 20}s`;
-    
+
     document.querySelector('.animated-background')?.appendChild(shape);
   }
 </script>

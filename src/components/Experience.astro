@@ -8,80 +8,83 @@ interface Job {
 
 const experience: Job[] = [
   {
-    company: "Tech Solutions Inc.",
-    role: "Frontend Developer",
-    duration: "Jan 2022 - Present",
+    company: 'Tech Solutions Inc.',
+    role: 'Frontend Developer',
+    duration: 'Jan 2022 - Present',
     description: [
-      "Developed responsive user interfaces using React.js.",
-      "Collaborated with cross-functional teams to deliver projects on time.",
-      "Optimized web performance to improve load times by 25%."
-    ]
+      'Developed responsive user interfaces using React.js.',
+      'Collaborated with cross-functional teams to deliver projects on time.',
+      'Optimized web performance to improve load times by 25%.',
+    ],
   },
   {
-    company: "Creative Studio",
-    role: "UI/UX Designer",
-    duration: "Aug 2020 - Dec 2021",
+    company: 'Creative Studio',
+    role: 'UI/UX Designer',
+    duration: 'Aug 2020 - Dec 2021',
     description: [
-      "Designed intuitive user experiences for web and mobile applications.",
-      "Conducted user research to inform design decisions.",
-      "Created wireframes, prototypes, and high-fidelity mockups."
-    ]
+      'Designed intuitive user experiences for web and mobile applications.',
+      'Conducted user research to inform design decisions.',
+      'Created wireframes, prototypes, and high-fidelity mockups.',
+    ],
   },
 ];
 ---
 
 <section id="experience" class="experience-section">
-<h2 class="section-title">Experience</h2>
-  {experience.map((job, index) => (
-    <div class="accordion">
-      <button
-        class="accordion-header"
-        aria-expanded={index === 0}
-      >
-        <div>
-          <h3>{job.role}</h3>
-          <p>{job.company} | {job.duration}</p>
+  <h2 class="section-title">Experience</h2>
+  {
+    experience.map((job, index) => (
+      <div class="accordion">
+        <button class="accordion-header" aria-expanded={index === 0}>
+          <div>
+            <h3>{job.role}</h3>
+            <p>
+              {job.company} | {job.duration}
+            </p>
+          </div>
+          <span class="accordion-icon" data-expanded={index === 0}>
+            {index === 0 ? '-' : '+'}
+          </span>
+        </button>
+        <div
+          class="accordion-content"
+          id={`accordion-content-${index}`}
+          style={`max-height: ${index === 0 ? '200px' : '0'};`}
+        >
+          <ul>
+            {job.description.map((point) => (
+              <li>{point}</li>
+            ))}
+          </ul>
         </div>
-        <span class="accordion-icon" data-expanded={index === 0}>{index === 0 ? '-' : '+'}</span>
-      </button>
-      <div
-        class="accordion-content"
-        id={`accordion-content-${index}`}
-        style={`max-height: ${index === 0 ? "200px" : "0"};`}
-      >
-        <ul>
-          {job.description.map((point) => (
-            <li>{point}</li>
-          ))}
-        </ul>
       </div>
-    </div>
-  ))}
+    ))
+  }
 </section>
 
 <script>
   let openIndex = 0;
 
   function toggleAccordion(index) {
-    const allContents = document.querySelectorAll(".accordion-content");
-    const allIcons = document.querySelectorAll(".accordion-icon");
+    const allContents = document.querySelectorAll('.accordion-content');
+    const allIcons = document.querySelectorAll('.accordion-icon');
     allContents.forEach((content, idx) => {
       if (idx === index) {
-        const isOpen = content.style.maxHeight !== "0px";
-        content.style.maxHeight = isOpen ? "0" : `${content.scrollHeight}px`;
-        allIcons[idx].textContent = isOpen ? "+" : "-";
+        const isOpen = content.style.maxHeight !== '0px';
+        content.style.maxHeight = isOpen ? '0' : `${content.scrollHeight}px`;
+        allIcons[idx].textContent = isOpen ? '+' : '-';
       } else {
-        content.style.maxHeight = "0";
-        allIcons[idx].textContent = "+";
+        content.style.maxHeight = '0';
+        allIcons[idx].textContent = '+';
       }
     });
   }
 
-    const buttons = document.querySelectorAll('.accordion-header');
+  const buttons = document.querySelectorAll('.accordion-header');
 
-    buttons.forEach((button, index) => {
-        button.addEventListener('click', () => toggleAccordion(index));
-    });
+  buttons.forEach((button, index) => {
+    button.addEventListener('click', () => toggleAccordion(index));
+  });
 </script>
 
 <style is:global>

@@ -1,5 +1,7 @@
 ---
+
 ---
+
 <div class="loader-container">
   <div class="dot-container">
     <div class="dot dot1"></div>
@@ -39,18 +41,21 @@
 
   /* Individual dot animations */
   .dot1 {
-    animation: fadeIn 0.5s ease forwards,
-               mergeDots 0.5s ease forwards 2s;
+    animation:
+      fadeIn 0.5s ease forwards,
+      mergeDots 0.5s ease forwards 2s;
   }
 
   .dot2 {
-    animation: fadeIn 0.5s ease 0.5s forwards,
-               mergeDots 0.5s ease forwards 2s;
+    animation:
+      fadeIn 0.5s ease 0.5s forwards,
+      mergeDots 0.5s ease forwards 2s;
   }
 
   .dot3 {
-    animation: fadeIn 0.5s ease 1s forwards,
-               mergeDots 0.5s ease forwards 2s;
+    animation:
+      fadeIn 0.5s ease 1s forwards,
+      mergeDots 0.5s ease forwards 2s;
   }
 
   .logo {
@@ -97,20 +102,20 @@
   // Sequence timing
   const DOTS_SEQUENCE = 2000; // Time for dots to appear and merge
   const LOGO_DURATION = 1000; // Time logo stays visible
-  const FADE_DURATION = 500;  // Fade out duration
+  const FADE_DURATION = 500; // Fade out duration
 
   // Get elements
   const container = document.querySelector('.loader-container');
-  
+
   // Loading sequence
   setTimeout(() => {
     // Show logo after dots merge
     container?.classList.add('logo-visible');
-    
+
     // Start fade out sequence
     setTimeout(() => {
       container?.classList.add('fade-out');
-      
+
       // Remove loader from DOM after animation
       setTimeout(() => {
         container?.remove();
