@@ -18,7 +18,7 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    background: #0a192f;
+    background: var(--bg-primary);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,14 +27,14 @@
 
   .dot-container {
     display: flex;
-    gap: 20px;
+    gap: 5px;
     position: relative;
   }
 
   .dot {
-    width: 15px;
-    height: 15px;
-    background-color: #64ffda;
+    width: 10px;
+    height: 10px;
+    background-color: var(--accent);
     border-radius: 50%;
     opacity: 0;
   }
@@ -60,7 +60,7 @@
 
   .logo {
     position: absolute;
-    width: 100px; /* Adjust based on your logo size */
+    width: 40px;
     height: auto;
     opacity: 0;
     transform: scale(0.8);
