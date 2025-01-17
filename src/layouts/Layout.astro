@@ -43,6 +43,7 @@ const { title = 'Ravik Ganguly' } = Astro.props;
     --highlight: #f1fa8c;
     --bg-primary: #fedebe;
     --text: #36454f;
+    --mute: #b0b0b0;
   }
 
   @font-face {
@@ -105,11 +106,13 @@ const { title = 'Ravik Ganguly' } = Astro.props;
     font-family: Outfit;
     background-color: var(--bg-primary);
     color: #ccd6f6;
+    scroll-behavior: smooth;
   }
 
   body {
     margin: 0;
     padding: 0;
+    color: var(--text);
   }
 
   main {
