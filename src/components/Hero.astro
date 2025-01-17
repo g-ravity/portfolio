@@ -15,6 +15,16 @@
   <div class="hero-content">
     <div class="name-container">
       <img src="/name.svg" alt="Name" class="name-svg animate-fade-in" />
+      <h1>
+        <a
+          href=""
+          class="typewrite"
+          data-period="2000"
+          data-type='[ "Backend Engineer", "Fullstack Developer", "DevOps Consultant", "Trading Algo Developer" ]'
+        >
+          <span class="wrap"></span>
+        </a>
+      </h1>
     </div>
     <div class="avatar-container">
       <div class="avatar-circle animate-circle">
@@ -53,7 +63,23 @@
     padding: 0 2rem;
   }
 
-  .name-container,
+  .name-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .name-container h1 {
+    margin-top: 2.5rem;
+  }
+
+  .name-container .typewrite {
+    text-decoration: none;
+    font-family: 'Butler';
+    color: #36454f;
+  }
+
   .avatar-container {
     flex: 1;
     display: flex;
@@ -243,26 +269,59 @@
 </style>
 
 <script>
-  // Add animation classes after page load
-  document.addEventListener('DOMContentLoaded', () => {
-    // Create random shapes
-    for (let i = 0; i < 5; i++) {
-      createRandomShape();
+  class TxtType {
+    constructor(el, toRotate, period) {
+      this.toRotate = toRotate;
+      this.el = el;
+      this.loopNum = 0;
+      this.period = parseInt(period, 10) || 2000;
+      this.txt = '';
+      this.isDeleting = false;
+      this.tick();
     }
-  });
 
-  function createRandomShape() {
-    const shapes = ['circle', 'triangle', 'square'];
-    const colors = ['#64ffda', '#ff79c6', '#50fa7b', '#8be9fd', '#f1fa8c'];
+    tick() {
+      const i = this.loopNum % this.toRotate.length;
+      const fullTxt = this.toRotate[i];
 
-    const shape = document.createElement('div');
-    shape.className = `shape ${shapes[Math.floor(Math.random() * shapes.length)]}`;
-    shape.style.left = `${Math.random() * 100}%`;
-    shape.style.top = `${Math.random() * 100}%`;
-    shape.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-    shape.style.animationDuration = `${15 + Math.random() * 10}s`;
-    shape.style.animationDelay = `-${Math.random() * 20}s`;
+      this.txt = this.isDeleting
+        ? fullTxt.substring(0, this.txt.length - 1)
+        : fullTxt.substring(0, this.txt.length + 1);
 
-    document.querySelector('.animated-background')?.appendChild(shape);
+      this.el.innerHTML = `<span class="wrap" style="font-size: 2rem">${this.txt}</span>`;
+
+      let delta = 200 - Math.random() * 100;
+
+      if (this.isDeleting) {
+        delta /= 2;
+      }
+
+      if (!this.isDeleting && this.txt === fullTxt) {
+        delta = this.period;
+        this.isDeleting = true;
+      } else if (this.isDeleting && this.txt === '') {
+        this.isDeleting = false;
+        this.loopNum++;
+        delta = 500;
+      }
+
+      setTimeout(() => this.tick(), delta);
+    }
   }
+
+  window.onload = () => {
+    const elements = document.getElementsByClassName('typewrite');
+    Array.from(elements).forEach((element) => {
+      const toRotate = element.getAttribute('data-type');
+      const period = element.getAttribute('data-period');
+      if (toRotate) {
+        new TxtType(element, JSON.parse(toRotate), period);
+      }
+    });
+
+    const css = document.createElement('style');
+    css.type = 'text/css';
+    css.innerHTML = '.typewrite > .wrap { border-right: 0.08em solid #fff }';
+    document.body.appendChild(css);
+  };
 </script>
