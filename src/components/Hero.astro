@@ -3,15 +3,7 @@
 ---
 
 <section class="hero">
-  <div class="animated-background">
-    <!-- Animated shapes -->
-    <div class="shape circle"></div>
-    <div class="shape triangle"></div>
-    <div class="shape square"></div>
-    <div class="shape circle-sm"></div>
-    <div class="shape triangle-sm"></div>
-  </div>
-
+  <div id="tsparticles"></div>
   <div class="hero-content">
     <div class="name-container">
       <img src="/name.svg" alt="Name" class="name-svg animate-fade-in" />
@@ -44,12 +36,19 @@
 </section>
 
 <style>
+  #tsparticles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+  }
+
   .hero {
     position: relative;
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    background-color: var(--bg-primary);
   }
 
   .animated-background {
@@ -247,81 +246,6 @@
     }
   }
 
-  /* Animated shapes */
-  .shape {
-    position: absolute;
-    opacity: 0.1;
-    animation: float 20s linear infinite;
-  }
-
-  .circle {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: var(--accent);
-    left: 10%;
-    top: 20%;
-  }
-
-  .triangle {
-    width: 0;
-    height: 0;
-    border-left: 50px solid transparent;
-    border-right: 50px solid transparent;
-    border-bottom: 86.6px solid #ff79c6;
-    right: 15%;
-    top: 30%;
-    animation-delay: -5s;
-  }
-
-  .square {
-    width: 70px;
-    height: 70px;
-    background: #50fa7b;
-    left: 30%;
-    bottom: 20%;
-    animation-delay: -10s;
-  }
-
-  .circle-sm {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: #8be9fd;
-    right: 25%;
-    bottom: 30%;
-    animation-delay: -15s;
-  }
-
-  .triangle-sm {
-    width: 0;
-    height: 0;
-    border-left: 25px solid transparent;
-    border-right: 25px solid transparent;
-    border-bottom: 43.3px solid #f1fa8c;
-    left: 20%;
-    bottom: 40%;
-    animation-delay: -7s;
-  }
-
-  @keyframes float {
-    0% {
-      transform: translate(0, 0) rotate(0deg);
-    }
-    25% {
-      transform: translate(100px, 100px) rotate(90deg);
-    }
-    50% {
-      transform: translate(200px, 0) rotate(180deg);
-    }
-    75% {
-      transform: translate(100px, -100px) rotate(270deg);
-    }
-    100% {
-      transform: translate(0, 0) rotate(360deg);
-    }
-  }
-
   /* Responsive design */
   @media (max-width: 768px) {
     .hero-content {
@@ -337,11 +261,6 @@
     .avatar-circle {
       width: 300px;
       height: 300px;
-    }
-
-    .shape {
-      transform-origin: center;
-      transform: scale(0.7);
     }
 
     .scroll-indicator {
@@ -407,6 +326,92 @@
   }
 
   window.onload = () => {
+    tsParticles.load('tsparticles', {
+      particles: {
+        number: {
+          value: 40,
+          density: {
+            enable: true,
+            value_area: 800,
+          },
+        },
+        color: {
+          value: [
+            '#fa4a2d',
+            '#f1fa8c',
+            '#ff6347',
+            '#00bfff',
+            '#6a5acd',
+            '#ffae42',
+            '#98fb98',
+            '#d3d3d3',
+            '#ffd1dc',
+            '#b2e7e8',
+          ],
+        },
+        shape: {
+          type: 'circle',
+        },
+        opacity: {
+          value: 0.8,
+          random: true,
+          animation: {
+            enable: true,
+            speed: 1,
+            minimumValue: 0.1,
+            sync: false,
+          },
+        },
+        size: {
+          value: 5,
+          random: true,
+          animation: {
+            enable: true,
+            speed: 2,
+            minimumValue: 0.1,
+            sync: false,
+          },
+        },
+        move: {
+          enable: true,
+          speed: 1.5,
+          direction: 'none',
+          random: true,
+          straight: false,
+          outModes: {
+            default: 'out',
+          },
+        },
+      },
+      interactivity: {
+        detectsOn: 'canvas',
+        events: {
+          onHover: {
+            enable: true,
+            mode: 'bubble',
+          },
+          onClick: {
+            enable: true,
+            mode: 'push',
+          },
+          resize: true,
+        },
+        modes: {
+          bubble: {
+            distance: 150,
+            size: 8,
+            duration: 2,
+            opacity: 0.8,
+            speed: 3,
+          },
+          push: {
+            quantity: 4,
+          },
+        },
+      },
+      detectRetina: true,
+    });
+
     const elements = document.getElementsByClassName('typewrite');
     Array.from(elements).forEach((element) => {
       const toRotate = element.getAttribute('data-type');
