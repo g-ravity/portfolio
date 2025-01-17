@@ -6,6 +6,10 @@
   <div id="tsparticles"></div>
   <div class="hero-content">
     <div class="name-container">
+      <div class="welcome">
+        <img src="/plants.png" alt="Plants" />
+        <p>Welcome to my portfolio!</p>
+      </div>
       <img src="/name.svg" alt="Name" class="name-svg animate-fade-in" />
       <h1>
         <a
@@ -21,7 +25,7 @@
     <div class="avatar-container">
       <div class="avatar-circle animate-circle">
         <div class="avatar-wrapper animate-rise">
-          <img src="/avatar-resize-shadow.png" alt="Avatar" class="avatar-svg" />
+          <img src="/avatar-resize.svg" alt="Avatar" class="avatar-svg" />
         </div>
       </div>
     </div>
@@ -77,6 +81,21 @@
     margin-top: 150px;
     margin-right: -110px;
     z-index: 100;
+  }
+
+  .name-container .welcome {
+    position: absolute;
+    top: 50px;
+    left: 70px;
+  }
+
+  .welcome img {
+    width: 300px;
+  }
+
+  .welcome p {
+    color: var(--text);
+    text-align: center;
   }
 
   .name-container h1 {
