@@ -6,92 +6,97 @@ interface Project {
   image: string;
   link: string;
   description: string;
-  height?: 'tall' | 'normal'; // Add height property for masonry variation
+  height?: 'tall' | 'normal';
 }
 
 const projects: Project[] = [
   {
-    title: 'Project 1',
-    image: '/avatar.svg',
+    title: 'Dhan Yojana',
+    image: '/dhan-yojana-logo.png',
     link: 'https://project1.com',
-    description: 'Description for project 1',
+    description: 'AUTOMATED TRADING PLATFORM',
     height: 'tall',
+    year: 2024,
   },
   {
-    title: 'Project 2',
-    image: '/avatar.svg',
+    title: 'African Price',
+    image: '/african-price.png',
     link: 'https://project2.com',
-    description: 'Description for project 2',
+    description: 'Q&A PLATFORM',
     height: 'normal',
+    year: 2021,
   },
   {
-    title: 'Project 3',
-    image: '/avatar.svg',
+    title: 'PlotChart',
+    image: '/backtest.png',
     link: 'https://project3.com',
-    description: 'Description for project 3',
+    description: 'TRADING ANALYTICS PLATFORM',
     height: 'normal',
+    year: 2024,
   },
   {
-    title: 'Project 4',
-    image: '/avatar.svg',
+    title: 'Amazeing',
+    image: '/maze.png',
     link: 'https://project4.com',
-    description: 'Description for project 4',
+    description: 'DSA MAZE GAME',
     height: 'tall',
+    year: 2020,
   },
 ];
 ---
 
-<section id="projects" class="projects-section max-w-7xl mx-auto px-4 py-16">
-  <h2 class="section-title">Projects</h2>
-  <div class="masonry-grid">
-    {
-      projects.map((project) => (
-        <div class="masonry-item">
-          <div class="project-card-wrapper">
-            <div class={`project-card ${project.height === 'tall' ? 'card-tall' : ''}`}>
-              <div class="blue-reveal" />
-              <div class="project-image">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  width={600}
-                  height={project.height === 'tall' ? 600 : 400}
-                />
+<section id="projects" class="projects-section">
+  <div class="projects-container">
+    <h2 class="section-title"><span>Projects</span></h2>
+    <div class="masonry-grid">
+      {
+        projects.map((project, index) => (
+          <div class={`masonry-item item-${index}`}>
+            <div class="project-card-wrapper">
+              <div class={`project-card ${project.height === 'tall' ? 'card-tall' : ''}`}>
+                <div class="blue-reveal" />
+                <div class="project-image">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    width={600}
+                    height={project.height === 'tall' ? 600 : 400}
+                  />
+                </div>
+                <div class="project-overlay">
+                  <span>{project.year}</span>
+                  <div>
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                  </div>
+                  <a href={project.link}>SEE THE PROJECT</a>
+                </div>
+                <div class="animated-border" />
               </div>
-              <div class="project-overlay">
-                <h3 class="text-xl font-bold mb-2">{project.title}</h3>
-                <p class="text-sm mb-4 text-center px-4">{project.description}</p>
-                <a href={project.link} class="text-accent hover:underline">
-                  View Project
-                </a>
-              </div>
-              <div class="animated-border" />
             </div>
           </div>
-        </div>
-      ))
-    }
+        ))
+      }
+    </div>
   </div>
 </section>
 
 <style>
-  .masonry-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 2rem;
-    grid-auto-flow: dense;
+  .projects-section {
+    min-height: 100vh;
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  @media (min-width: 768px) {
-    .masonry-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .masonry-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  .projects-container {
+    max-width: 1200px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
   }
 
   .section-title {
@@ -99,12 +104,58 @@ const projects: Project[] = [
     margin-bottom: 3rem;
     text-align: center;
     color: var(--accent);
+    font-family: 'Butler';
+    font-weight: 800;
+  }
+
+  .section-title span {
+    position: relative;
+  }
+
+  .section-title span::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: 0px;
+    width: 120%;
+    height: 10px;
+    background: var(--underline);
+    transform: skewX(-30deg);
+  }
+
+  .masonry-grid {
+    column-count: 1;
+    column-gap: 2rem;
+    width: 100%;
+  }
+
+  .masonry-item {
+    break-inside: avoid;
+    margin-bottom: 5rem;
+  }
+
+  .item-0,
+  .item-1 {
+    margin-right: 2.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .masonry-grid {
+      column-count: 2;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .masonry-grid {
+      column-count: 2;
+    }
   }
 
   .project-card-wrapper {
     perspective: 1000px;
     transform-style: preserve-3d;
     width: 100%;
+    display: inline-block;
   }
 
   .project-card {
@@ -120,7 +171,7 @@ const projects: Project[] = [
   }
 
   .card-tall {
-    height: 450px;
+    height: 600px;
   }
 
   .blue-reveal {
@@ -155,7 +206,7 @@ const projects: Project[] = [
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(10, 25, 47, 0.85);
+    background: rgba(10, 25, 47, 0.65);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -163,6 +214,45 @@ const projects: Project[] = [
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 3;
+    cursor: default;
+  }
+
+  .project-overlay div {
+    position: absolute;
+    text-align: center;
+  }
+
+  .project-overlay h3 {
+    font-family: 'Butler';
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 0;
+    font-size: 2.5rem;
+  }
+
+  .project-overlay span {
+    color: var(--bg-primary);
+    justify-self: flex-start;
+    display: block;
+    position: absolute;
+    top: 20px;
+    font-size: 0.75rem;
+  }
+
+  .project-overlay p {
+    color: var(--bg-primary);
+    margin-top: 5px;
+    font-size: 0.85rem;
+    font-family: 'Butler';
+  }
+
+  .project-overlay a {
+    color: var(--bg-primary);
+    text-decoration: none;
+    font-size: 0.75rem;
+    position: absolute;
+    bottom: 20px;
+    cursor: pointer;
   }
 
   .animated-border {
@@ -267,10 +357,8 @@ const projects: Project[] = [
     });
   }
 
-  // Initialize on page load
   document.addEventListener('astro:page-load', initializeCards);
 
-  // Fallback for when astro:page-load doesn't fire
   if (document.readyState === 'complete') {
     initializeCards();
   } else {
