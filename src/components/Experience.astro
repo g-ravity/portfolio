@@ -8,58 +8,79 @@ interface Job {
 
 const experience: Job[] = [
   {
-    company: 'Tech Solutions Inc.',
-    role: 'Frontend Developer',
-    duration: 'Jan 2022 - Present',
+    company: 'Dhan Yojana',
+    role: 'Freelance Developer',
+    duration: 'July 2024 - Present',
     description: [
-      'Developed responsive user interfaces using React.js.',
-      'Collaborated with cross-functional teams to deliver projects on time.',
-      'Optimized web performance to improve load times by 25%.',
+      'Architected a full-scale algorithmic trading system in TypeScript/Node.js for parallel execution of multiple strategies across multiple trading accounts',
+      'Built Shield, a robust Typescript package, by porting NorenApi-js library with enhanced type safety, error handling, API retries, and logging capabilities',
+      'Engineered Hermes, a high-performance event service processing 900-1000 events/minute with guaranteed order execution in Node.js',
+      'Developed Plotchart, a comprehensive backtesting platform for trading strategies with configurable parameters and interactive visualizations',
+      'Implemented a Telegram bot for complete algo management including real-time monitoring, risk management, and system configuration',
+      'Implemented a CI/CD pipeline on GCP for automated deployment, incorporating GitHub integration and Compute Engine resources',
+      'Built modular microservices for strategy signals, risk management, trade execution, and order management',
     ],
   },
   {
-    company: 'Creative Studio',
-    role: 'UI/UX Designer',
-    duration: 'Aug 2020 - Dec 2021',
+    company: 'Railofy',
+    role: 'Software Engineer',
+    duration: 'Feb 2022 - June 2024',
     description: [
-      'Designed intuitive user experiences for web and mobile applications.',
-      'Conducted user research to inform design decisions.',
-      'Created wireframes, prototypes, and high-fidelity mockups.',
+      'Developed and integrated scraper services for train data and live train status',
+      'Development and ownership of pricing service which processes train availability data to display travel insurance offers to users',
+      'Helped in resolving SEO issues, which resulted in our app being listed on 4th position for food delivery in train',
+      'Planning and implementation of notification framework which includes whatsapp, email and push notifications via firebase',
+      'Involved in the development of an entire database for train data via scrape and paid api flows, which included train, class, quota and PNR data for machine learning models',
+      'Revamped an existing scraper service to scrape thousands of PNR data every day, with fault tolerance, type safety, IP rotation and google captcha bypass',
+      'Developed WhatsApp PNR bot for PNR status, ordering food and other uses, which drives major traffic on our website',
+      'Involved in integration of Railofy Travel Guarantee insurance on IRCTC',
+      'Worked on infra development and platform monitoring using tools like Kafka, bullqueue, ELK stack, Grafana, ECS, S3, Docker and others',
+    ],
+  },
+  {
+    company: 'speakX (previously Yellow Class)',
+    role: 'Fullstack SDE 2',
+    duration: 'Aug 2020 - Jan 2022',
+    description: [
+      'Responsible for the complete development and maintenance of the admin panel of the platform.',
+      'Improved response time of slow MongoDB queries by 50-80%',
+      'Implemented custom file upload and processing system using Dropbox API,  S3 and AWS MediaConvert.',
+      'Implemented Instagram reels like feature using ElasticSearch & RabbitMQ',
+      'Designed a system to generate pdf certificates in Node and upload them to S3 from JSON data collected from MongoDB',
     ],
   },
 ];
 ---
 
 <section id="experience" class="experience-section">
-  <h2 class="section-title">Experience</h2>
-  {
-    experience.map((job, index) => (
-      <div class="accordion">
-        <button class="accordion-header" aria-expanded={index === 0}>
-          <div>
-            <h3>{job.role}</h3>
-            <p>
-              {job.company} | {job.duration}
-            </p>
+  <div class="experience-container">
+    <h2 class="section-title"><span>Experience</span></h2>
+    {
+      experience.map((job, index) => (
+        <div class="accordion">
+          <div class="accordion-header" aria-expanded={index === 0}>
+            <div>
+              <h3>{job.company}</h3>
+              <p>
+                {job.role} | {job.duration}
+              </p>
+            </div>
           </div>
-          <span class="accordion-icon" data-expanded={index === 0}>
-            {index === 0 ? '-' : '+'}
-          </span>
-        </button>
-        <div
-          class="accordion-content"
-          id={`accordion-content-${index}`}
-          style={`max-height: ${index === 0 ? '200px' : '0'};`}
-        >
-          <ul>
-            {job.description.map((point) => (
-              <li>{point}</li>
-            ))}
-          </ul>
+          <div
+            class="accordion-content"
+            id={`accordion-content-${index}`}
+            style={`max-height: ${index === 0 ? '360px' : '0'};`}
+          >
+            <ul>
+              {job.description.map((point) => (
+                <li>{point}</li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
-    ))
-  }
+      ))
+    }
+  </div>
 </section>
 
 <script>
@@ -67,15 +88,12 @@ const experience: Job[] = [
 
   function toggleAccordion(index) {
     const allContents = document.querySelectorAll('.accordion-content');
-    const allIcons = document.querySelectorAll('.accordion-icon');
     allContents.forEach((content, idx) => {
       if (idx === index) {
         const isOpen = content.style.maxHeight !== '0px';
         content.style.maxHeight = isOpen ? '0' : `${content.scrollHeight}px`;
-        allIcons[idx].textContent = isOpen ? '+' : '-';
       } else {
         content.style.maxHeight = '0';
-        allIcons[idx].textContent = '+';
       }
     });
   }
@@ -89,9 +107,19 @@ const experience: Job[] = [
 
 <style is:global>
   .experience-section {
-    padding: 2rem;
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .experience-container {
     max-width: 800px;
-    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 2;
   }
 
   .section-title {
@@ -99,13 +127,26 @@ const experience: Job[] = [
     margin-bottom: 3rem;
     text-align: center;
     color: var(--accent);
+    font-family: 'Butler';
+    font-weight: 800;
+  }
+
+  .section-title span {
+    position: relative;
+  }
+
+  .section-title span::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    right: 0px;
+    width: 120%;
+    height: 10px;
+    background: var(--underline);
+    transform: skewX(-30deg);
   }
 
   .accordion {
-    margin: 1rem 0;
-    border: 1px solid #2c3e50;
-    border-radius: 8px;
-    background-color: #112240;
     overflow: hidden;
   }
 
@@ -113,30 +154,36 @@ const experience: Job[] = [
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: inherit;
+    padding-left: 1.5rem;
+    background-color: orange;
+    border-radius: 10px;
+    box-sizing: border-box;
     width: 100%;
     font-size: 1rem;
     text-align: left;
+    cursor: pointer;
+    margin: 0.6rem 0;
   }
 
-  .accordion-icon {
+  .accordion-header h3 {
+    margin-bottom: 0;
     font-size: 1.5rem;
-    color: var(--accent);
-    transition: transform 0.3s ease;
+  }
+
+  .accordion-header p {
+    margin-top: 9px;
+    font-size: 0.9rem;
   }
 
   .accordion-content {
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.3s ease-in-out;
     max-height: 0;
+    background-color: #ffcea0;
+    border-radius: 10px;
   }
 
   .accordion-content ul {
-    padding: 1rem;
     list-style: disc;
   }
 
