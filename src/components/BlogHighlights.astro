@@ -8,46 +8,59 @@ interface Blog {
 const blogs: Blog[] = [
   {
     title: 'Introduction to Astro',
-    description: 'Learn the basics of building lightning-fast websites with Astro.',
+    description:
+      'Learn the basics of building lightning-fast websites with Astro. Some more random content. Some more random content. Some more random content.',
     link: '#',
   },
   {
     title: '10 JavaScript Tips for Developers',
-    description: 'Enhance your JS skills with these practical tips and tricks.',
+    description:
+      'Enhance your JS skills with these practical tips and tricks. Some more random content. Some more random content. Some more random content.',
     link: '#',
   },
   {
     title: 'Designing for Accessibility',
-    description: 'Key considerations to make your designs inclusive for everyone.',
+    description:
+      'Key considerations to make your designs inclusive for everyone. Some more random content. Some more random content. Some more random content.',
     link: '#',
   },
 ];
 ---
 
-<section class="blog-highlights">
-  <h2>Blog Highlights</h2>
-  <div style="display: flex">
-    <div class="folder" id="folder-icon">
-      <svg width="200" height="160" viewBox="0 0 200 160" fill="none">
-        <!-- Tab -->
-        <path
-          class="folder-tab"
-          d="M20 0H80L100 20H180C191 20 200 29 200 40V140C200 151 191 160 180 160H20C9 160 0 151 0 140V20C0 9 9 0 20 0Z"
-          fill="#64ffda"
-          fill-opacity="0.2"></path>
-        <!-- Main folder -->
-        <path
-          class="folder-body"
-          d="M0 40C0 29 9 20 20 20H180C191 20 200 29 200 40V140C200 151 191 160 180 160H20C9 160 0 151 0 140V40Z"
-          fill="#64ffda"
-          fill-opacity="0.3"></path>
-      </svg>
-    </div>
-    <div class="blog-paper" id="blog-paper">
-      <div class="blog-content">
-        <h3 id="blog-title">{blogs[0].title}</h3>
-        <p id="blog-description">{blogs[0].description}</p>
-        <a id="blog-link" href={blogs[0].link} target="_blank">Read More</a>
+<section class="blog-section" id="blog">
+  <div class="blog-container">
+    <h2 class="section-title"><span>Blog</span></h2>
+    <div style="display: flex; align-items: center">
+      <div style="display: flex; flex-direction: column;">
+        <div class="folder">
+          <svg id="folder-icon" width="200" height="160" viewBox="0 0 200 160" fill="none">
+            <!-- Tab -->
+            <path
+              class="folder-tab"
+              d="M20 0H80L100 20H180C191 20 200 29 200 40V140C200 151 191 160 180 160H20C9 160 0 151 0 140V20C0 9 9 0 20 0Z"
+              fill="#4599D6"
+              fill-opacity="1"></path>
+            <!-- Main folder -->
+            <path
+              class="folder-body"
+              d="M0 40C0 29 9 20 20 20H180C191 20 200 29 200 40V140C200 151 191 160 180 160H20C9 160 0 151 0 140V40Z"
+              fill="#73C4F5"
+              fill-opacity="1"></path>
+          </svg>
+        </div>
+        <img src="/hand.png" style="width: 130px" />
+      </div>
+      <div class="blog-paper" id="blog-paper">
+        <div class="browser-bar">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+        <div class="blog-content">
+          <h3 id="blog-title">{blogs[0].title}</h3>
+          <p id="blog-description">{blogs[0].description}</p>
+          <a id="blog-link" href={blogs[0].link} target="_blank">Read More</a>
+        </div>
       </div>
     </div>
   </div>
@@ -57,17 +70,20 @@ const blogs: Blog[] = [
   const blogs: Blog[] = [
     {
       title: 'Introduction to Astro',
-      description: 'Learn the basics of building lightning-fast websites with Astro.',
+      description:
+        'Learn the basics of building lightning-fast websites with Astro. Some more random content. Some more random content. Some more random content.',
       link: '#',
     },
     {
       title: '10 JavaScript Tips for Developers',
-      description: 'Enhance your JS skills with these practical tips and tricks.',
+      description:
+        'Enhance your JS skills with these practical tips and tricks. Some more random content. Some more random content. Some more random content.',
       link: '#',
     },
     {
       title: 'Designing for Accessibility',
-      description: 'Key considerations to make your designs inclusive for everyone.',
+      description:
+        'Key considerations to make your designs inclusive for everyone. Some more random content. Some more random content. Some more random content.',
       link: '#',
     },
   ];
@@ -85,16 +101,13 @@ const blogs: Blog[] = [
     const blogDescription = document.getElementById('blog-description');
     const blogLink = document.getElementById('blog-link');
 
-    // Animation to "throw out" the paper
     blogPaper.classList.add('animate-out');
     setTimeout(() => {
-      // Update blog content
       const nextIndex = getNextIndex();
       blogTitle.textContent = blogs[nextIndex].title;
       blogDescription.textContent = blogs[nextIndex].description;
       blogLink.href = blogs[nextIndex].link;
 
-      // Reset animation
       blogPaper.classList.remove('animate-out');
       blogPaper.classList.add('animate-in');
 
@@ -109,21 +122,78 @@ const blogs: Blog[] = [
 </script>
 
 <style is:global>
-  .blog-highlights {
-    padding: 2rem;
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
+  .blog-section {
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .blog-highlights h2 {
+  .blog-container {
+    max-width: 800px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+
+  .blog-container .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
     color: var(--accent);
+    font-family: 'Butler';
+    font-weight: 800;
+  }
+
+  .blog-container .section-title span {
+    position: relative;
+  }
+
+  .blog-container .section-title span::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0px;
+    width: 120%;
+    height: 10px;
+    background: var(--underline);
+    transform: skewX(-30deg);
   }
 
   .folder {
     display: inline-block;
-    cursor: pointer;
     margin-top: 2rem;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: idle 2s ease-in-out infinite;
+  }
+
+  .folder svg {
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes idle {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  .folder svg:hover {
+    transform: rotate(-5deg);
+  }
+
+  .folder svg:hover .folder-tab {
+    fill: #5baae7;
+  }
+
+  .folder svg:hover .folder-body {
+    fill: #8ed1f9;
   }
 
   .folder-icon {
@@ -136,95 +206,85 @@ const blogs: Blog[] = [
     transform: scale(1.1);
   }
 
-  .blog-paper.animate-out {
-    transform: translateY(-50px) rotate(-10deg);
-    opacity: 0;
-  }
-
-  .blog-paper.animate-in {
-    transform: translateY(50px) rotate(10deg);
-    opacity: 1;
-  }
-
   .blog-paper {
     margin: 2rem auto;
     width: 90%;
     max-width: 400px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
+    background: #ffcea0;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem 1.5rem 1rem;
     position: relative;
-    border: 1px solid #dcdcdc;
-    font-family: 'Arial', sans-serif;
+    border: 4px solid orange;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
   }
 
-  /* The top bar mimicking a browser window */
-  .blog-paper::before {
-    content: '';
-    display: block;
-    height: 40px;
-    background: #f5f5f5;
-    border-radius: 12px 12px 0 0;
-    border-bottom: 1px solid #dcdcdc;
-    position: relative;
+  .blog-paper.animate-out {
+    animation: paperOut 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 
-  /* The window control buttons (red, yellow, green) */
-  .blog-paper::after {
-    content: '';
+  .blog-paper.animate-in {
+    animation: paperIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes paperOut {
+    0% {
+      transform: translateX(0) rotate(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-100%) rotate(-10deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes paperIn {
+    0% {
+      transform: translateX(100%) rotate(10deg);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0) rotate(0);
+      opacity: 1;
+    }
+  }
+
+  .browser-bar {
     display: flex;
-    gap: 8px;
-    position: absolute;
-    top: 12px;
-    left: 15px;
+    align-items: center;
+    height: 24px;
+    background: #ffcea0;
+    border-radius: 8px 8px 0 0;
+    padding: 0 0.75rem;
+    margin: -1.5rem -1.5rem 1rem;
+    border-bottom: 4px solid orange;
   }
 
-  .blog-paper::after span {
+  .browser-bar .dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    display: inline-block;
+    margin-right: 8px;
+    background-color: var(--underline);
   }
 
-  .blog-paper::after span:nth-child(1) {
-    background: #ff5f56; /* Red button */
-  }
-
-  .blog-paper::after span:nth-child(2) {
-    background: #ffbd2e; /* Yellow button */
-  }
-
-  .blog-paper::after span:nth-child(3) {
-    background: #27c93f; /* Green button */
-  }
-
-  /* Content inside the blog paper */
   .blog-content h3 {
-    margin: 1rem 0 0.5rem;
-    color: #333333;
-    font-size: 1.2rem;
-    font-weight: bold;
+    margin: 0 0 1.5rem;
+    font-size: 1.8rem;
+    font-family: 'Butler';
   }
 
   .blog-content p {
-    margin: 0 0 1rem;
-    color: #555555;
+    margin: 0 0 3rem;
     font-size: 1rem;
-    line-height: 1.5;
   }
 
   .blog-content a {
     display: inline-block;
-    margin-top: 1rem;
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
     font-size: 0.9rem;
-    transition: color 0.3s ease;
-  }
-
-  .blog-content a:hover {
-    color: #0056b3;
+    color: var(--accent);
+    font-weight: bold;
+    text-decoration: none;
   }
 </style>

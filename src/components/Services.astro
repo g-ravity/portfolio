@@ -3,7 +3,7 @@
 ---
 
 <section id="services" class="service-section">
-  <div class="content">
+  <div class="services-container">
     <h2 class="section-title"><span>Services</span></h2>
 
     <div class="services-grid">
@@ -257,14 +257,14 @@
     background-color: var(--background);
   }
 
-  .content {
+  .services-container {
     position: relative;
     z-index: 2;
     max-width: 1200px;
     margin: 0 auto;
   }
 
-  .section-title {
+  .services-container .section-title {
     font-size: 2.5rem;
     margin-bottom: 3rem;
     text-align: center;
@@ -273,11 +273,11 @@
     font-weight: 800;
   }
 
-  .section-title span {
+  .services-container .section-title span {
     position: relative;
   }
 
-  .section-title span::after {
+  .services-container .section-title span::after {
     content: '';
     position: absolute;
     bottom: 2px;
