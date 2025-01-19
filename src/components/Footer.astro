@@ -5,27 +5,39 @@
 <footer class="footer">
   <div class="footer-content">
     <p class="footer-heading">
-      Let's start a project together,
-      <span class="highlight" aria-label="Contact Me">don't hesitate to contact me</span>
+      Let's start a project together, don't hesitate to
+      <span class="highlight" aria-label="Contact Me"><span>contact me</span></span>
     </p>
-    <hr />
-    <div class="footer-info">
-      <div class="footer-left">
-        <p>© 2025, All rights reserved.</p>
-        <p>Designed with ❤️ by Ravik Ganguly</p>
-      </div>
-      <div class="footer-right">
-        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">LinkedIn</a>
-        <a href="https://github.com" target="_blank" aria-label="GitHub">GitHub</a>
-        <a href="https://twitter.com" target="_blank" aria-label="Twitter">Twitter</a>
+    <div style="width: 92%">
+      <hr />
+      <div class="footer-info">
+        <div class="footer-left">
+          <p>© 2025, All rights reserved.</p>
+          <p>Designed by Ravik Ganguly</p>
+          <p style="font-size: 0.7rem">
+            Illustrations by <a
+              href="https://pictographic.io"
+              target="_blank"
+              style="text-decoration: none; color: inherit">PictoGraphic.io</a
+            >
+          </p>
+        </div>
+        <div class="footer-right">
+          <a
+            href="https://www.linkedin.com/in/ravik-ganguly-515549137/"
+            target="_blank"
+            aria-label="LinkedIn">LINKEDIN</a
+          >
+          <a href="https://github.com/g-ravity" target="_blank" aria-label="GitHub">GITHUB</a>
+          <a href="https://x.com/the_gravityguy" target="_blank" aria-label="X">X</a>
+        </div>
       </div>
     </div>
   </div>
-  <div class="footer-graphic">
-    <!-- SVG graphic (mountain or wave pattern) -->
+  <div class="footer-graphic" style="box-shadow: 1px solid black">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
       <path
-        fill="#112240"
+        fill="#f4d3b2"
         fill-opacity="1"
         d="M0,160L30,133.3C60,107,120,53,180,64C240,75,300,149,360,160C420,171,480,117,540,90.7C600,64,660,64,720,69.3C780,75,840,85,900,101.3C960,117,1020,139,1080,138.7C1140,139,1200,117,1260,90.7C1320,64,1380,32,1410,16L1440,0L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"
       ></path>
@@ -38,15 +50,21 @@
     background-color: var(--bg-primary);
     color: var(--text);
     text-align: center;
-    padding: 2rem;
+    margin-top: 8rem;
     position: relative;
   }
 
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .footer-heading {
-    font-size: 1.8rem;
-    font-weight: bold;
+    font-size: 2.2rem;
     margin-bottom: 1rem;
     line-height: 1.5;
+    font-family: 'Butler';
   }
 
   .highlight {
@@ -54,63 +72,76 @@
     position: relative;
     color: var(--accent);
     cursor: pointer;
-    text-decoration: underline;
+    padding: 2px 7px;
     transition: color 0.3s ease;
+    line-height: 1;
+    z-index: 1;
   }
 
-  .highlight::after {
+  .highlight span {
+    position: relative;
+    z-index: 2;
+  }
+
+  .highlight::before {
     content: '';
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 0;
-    height: 100%;
-    background: var(--accent);
+    width: 100%;
+    height: 3px;
+    background-color: var(--accent);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: -1;
-    transition: width 0.3s ease;
   }
 
   .highlight:hover {
-    color: #0a192f;
+    color: var(--bg-primary);
   }
 
-  .highlight:hover::after {
-    width: 100%;
+  .highlight:hover::before {
+    height: 100%;
+  }
+
+  @keyframes lineDown {
+    0% {
+      height: 100%;
+    }
+    100% {
+      height: 2px;
+    }
   }
 
   hr {
     border: 0;
-    border-top: 2px solid var(--accent);
-    margin: 2rem 0;
+    border-top: 2px solid var(--mute);
+    margin: 3rem 0;
   }
 
   .footer-info {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     padding: 1rem 0;
+    color: var(--text);
   }
 
   .footer-left {
     text-align: left;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 
   .footer-right a {
-    color: var(--accent);
+    color: var(--mute);
     margin: 0 0.5rem;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 0.8rem;
     transition: color 0.3s ease;
   }
 
   .footer-right a:hover {
-    color: #ffffff;
-  }
-
-  .footer-graphic {
-    margin-top: 2rem;
+    color: var(--accent);
   }
 
   .footer-graphic svg {
